@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <SuperHeader className="super-header-main" />
+      <SuperHeader className="super-header" />
       <SuperHeaderRemoved />
       <MainHeader>
         <Side>
@@ -91,7 +91,7 @@ const Side = styled.div`
 
 const Wrapper = styled.header`
   @media ${QUERIES.tabletAndDown} {
-    .super-header-main {
+    .super-header {
       display: none;
     }
     ${Side}:not(:first-of-type) {
