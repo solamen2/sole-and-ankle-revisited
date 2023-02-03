@@ -65,7 +65,11 @@ const SuperHeaderRemoved = styled.div`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(
+    2rem,
+    14vw - 7rem,
+    6rem
+  );
   margin: 0px 48px;
 `;
 
@@ -102,9 +106,10 @@ const Wrapper = styled.header`
 
 const MainHeader = styled.div`
   display: flex;
+  overflow: auto;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
+  height: 74px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
   @media ${QUERIES.tabletAndDown} {
