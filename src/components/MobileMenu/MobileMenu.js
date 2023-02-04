@@ -8,10 +8,6 @@ import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
       <Content aria-label="Menu">
@@ -45,6 +41,7 @@ const Overlay = styled(DialogOverlay)`
   width: 100%;
   top: 0px;
   left: 0px;
+  right: 0px;
   bottom: 0px;
   background: var(--color-dimmed-gray);
   opacity: 1.0;
@@ -57,7 +54,7 @@ const Content = styled(DialogContent)`
 
   position: fixed;
   height: 100%;
-  width: 80%;
+  width: 300px;
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -68,8 +65,9 @@ const Content = styled(DialogContent)`
 
 const UnstyledButtonClose = styled(UnstyledButton)`
   position: absolute;
-  top: 26px;
-  right: 16px;
+  top: 10px;
+  right: 0px;
+  padding: 16px;
 `;
 
 const Nav = styled.nav`
@@ -77,7 +75,7 @@ const Nav = styled.nav`
   flex: 1 1000000 auto;
   flex-direction: column;
   justify-content: center;
-  gap: 22px;
+  gap: 16px;
 `;
 
 const NavLink = styled.a`

@@ -7,6 +7,7 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu'; 
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -18,31 +19,34 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <SuperHeader className="super-header" />
-      <SuperHeaderRemoved />
+      <SuperHeader/>
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
-        <Nav>
+        </LogoWrapper>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side>
+        </DesktopNav>
+        <MobileNav>
           <UnstyledButton>
             <Icon id="shopping-bag" strokeWidth={2} />
+            <VisuallyHidden>Open cart</VisuallyHidden>
           </UnstyledButton>
           <UnstyledButton>
             <Icon id="search" strokeWidth={2} />
+            <VisuallyHidden>Search</VisuallyHidden>
           </UnstyledButton>
           <UnstyledButton onClick={() => setShowMobileMenu(true)}>
             <Icon id="menu" strokeWidth={2} />
+            <VisuallyHidden>Menu</VisuallyHidden>
           </UnstyledButton>
-        </Side>
+        </MobileNav>
+        <Filler />
       </MainHeader>
 
       <MobileMenu
@@ -53,17 +57,7 @@ const Header = () => {
   );
 };
 
-const SuperHeaderRemoved = styled.div`
-  display: none;
-  @media ${QUERIES.tabletAndDown} {
-    display: revert;
-  }
-
-  background: var(--color-gray-900);
-  height: 4px;
-`;
-
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: clamp(
     2rem,
@@ -73,16 +67,31 @@ const Nav = styled.nav`
   margin: 0px 48px;
 `;
 
-const Side = styled.div`
+const LogoWrapper = styled.div`
   flex: 1;
+
+  @media(${QUERIES.tabletAndDown}) {
+    flex: revert;
+  }
+`;
+
+const Filler = styled.div`
+  flex: 1;
+
+  @media(${QUERIES.tabletAndDown}) {
+    display: none;
+  }
+`;
+
+const MobileNav = styled.div`
   display: flex;
 
   gap: clamp(
-    17px,
+    16px,
     5vw,
-    34px
+    32px
   );
-  
+
   > ${UnstyledButton} {
     display: none;
   }
@@ -94,26 +103,24 @@ const Side = styled.div`
 `;
 
 const Wrapper = styled.header`
-  @media ${QUERIES.tabletAndDown} {
-    .super-header {
-      display: none;
-    }
-    ${Side}:not(:first-of-type) {
-      justify-content: flex-end;
-    }
-  }
+
 `;
 
 const MainHeader = styled.div`
   display: flex;
   overflow: auto;
+  gap: 16px;
   align-items: baseline;
   padding: 18px 32px;
-  height: 74px;
-  border-bottom: 1px solid var(--color-gray-300);;
+  border-top: 4px solid var(--color-gray-900);
+  border-bottom: 1px solid var(--color-gray-300);
+  justify-content: space-between;
 
   @media ${QUERIES.tabletAndDown} {
-    > ${Nav} {
+    justify-content: space-between;
+    align-items: center;
+    
+    > ${DesktopNav} {
       display: none;
     }
   }

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import { QUERIES } from '../../constants';
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 
-const SuperHeader = ({className, ...delegated}) => {
+const SuperHeader = () => {
   return (
-    <Wrapper className={className} {...delegated}>
+    <Wrapper>
       <MarketingMessage>
         Free shipping on domestic orders over $75!
       </MarketingMessage>
@@ -27,9 +28,13 @@ const Wrapper = styled.div`
   font-size: 0.875rem;
   color: var(--color-gray-300);
   background-color: var(--color-gray-900);
-  height: 40px;
+  height: 36px;
   padding-left: 32px;
   padding-right: 32px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const MarketingMessage = styled.span`
